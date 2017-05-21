@@ -1,26 +1,31 @@
 const users = [
   {
-    name: '@dan_abramov',
+    id: '@dan_abramov',
+    name: 'Dan Abramov',
     followers: ['@coffeeHeadJim', '@BrendanEich', '@paul_irish'],
     tweets: [1],
   },
   {
-    name: '@coffeeHeadJim',
+    id: '@coffeeHeadJim',
+    name: 'James Nolan',
     followers: ['@graphqleu'],
     tweets: [],
   },
   {
-    name: '@BrendanEich',
+    id: '@BrendanEich',
+    name: 'Brendan Eich',
     followers: ['@dan_abramov', '@graphqleu'],
     tweets: [2],
   },
   {
-    name: '@paul_irish',
+    id: '@paul_irish',
+    name: 'Paul Irish',
     followers: ['@dan_abramov', '@BrendanEich', '@coffeeHeadJim'],
     tweets: [3],
   },
   {
-    name: '@graphqleu',
+    id: '@graphqleu',
+    name: 'GraphQL Europe',
     followers: ['@coffeeHeadJim'],
     tweets: [],
   },
@@ -54,12 +59,12 @@ const loadTweets = ({ author, limit }) => {
   return Promise.resolve(filteredTweets.slice(0, limit))
 }
 
-const loadUser = (name) => {
-  const user = users.find(u => u.name === name)
+const loadUser = (id) => {
+  const user = users.find(u => u.id === id)
   return Promise.resolve(user)
 }
 
-const loadFollowers = name => loadUser(name)
+const loadFollowers = id => loadUser(id)
   .then(user => Promise.all(user.followers.map(loadUser)))
 
 module.exports = {
