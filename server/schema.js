@@ -14,4 +14,7 @@ module.exports = `
   type Query {
     tweets(limit: Int): [Tweet]
   }
+  type Mutation {
+    likeTweet(id: ID): Tweet
+  }
 `

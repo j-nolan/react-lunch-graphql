@@ -11,4 +11,7 @@ module.exports = {
   Query: {
     tweets: (_, { limit }) => store.loadTweets({ limit }),
   },
+  Mutation: {
+    likeTweet: (_, { id }) => store.likeTweet(Number(id)),
+  },
 }

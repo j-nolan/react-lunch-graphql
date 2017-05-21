@@ -67,8 +67,17 @@ const loadUser = (id) => {
 const loadFollowers = id => loadUser(id)
   .then(user => Promise.all(user.followers.map(loadUser)))
 
+const likeTweet = (id) => {
+  const tweet = tweets.find(t => t.id === id)
+  if (tweet) {
+    tweet.likes += 1
+  }
+  return Promise.resolve(tweet)
+}
+
 module.exports = {
   loadTweets,
   loadUser,
   loadFollowers,
+  likeTweet,
 }
