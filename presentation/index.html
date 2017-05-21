@@ -43,31 +43,33 @@
 - [j.nolan@otherwise.ch](mailto:j.nolan@otherwise.ch)
                     </textarea>
                 </section>
-                <section data-markdown>
-                    <textarea data-template>
-## new GraphQL()
-
-- in 2012 Facebook released its mobile app 
-- the app was built in html5
-- bad response from user. Laggy feeling 
-- they decided to completely redesign the app in the native environment 
-- at the time, Facebook was a "simple" PHP website. Serverside rendered. Move fast, break things. Everybody could see new releases instantly. No need to have an API layer, no need for maintaining endpoints, They wanted to keep that speed
-- one of the main question that came up was "What would an ideal API look like?"
-- and they built graphql
-- conclusion: graphql was built for native apps by web developers 
-- this may be graphql popularity in web apps today
-                    </textarea>
+                <section>
+                    <h2>History</h2>
+                    <aside class="notes">
+                      <ul>
+                        <li>in 2012 Facebook released its mobile app</li>
+                        <li>the app was built in html5</li>
+                        <li>bad response from user. Laggy feeling</li>
+                        <li>they decided to completely redesign the app in the native environment</li>
+                        <li>at the time, Facebook was a "simple" PHP website. Serverside rendered. Move fast, break things. Everybody could see new releases instantly. No need to have an API layer, no need for maintaining endpoints, They wanted to keep that speed</li>
+                        <li>one of the main question that came up was "What would an ideal API look like?"</li>
+                        <li>and they built graphql</li>
+                        <li>conclusion: graphql was built for native apps by web developers</li>
+                        <li>this may be graphql popularity in web apps today</li>
+                      </ul>
+                    </aside>
                 </section>
-                <section data-markdown>
-                    <textarea data-template>
-## GraphQL.now()
-
-- Since then, GraphQL powers the Android and iOS Facebook apps
-- 300 billion+ requests per day at Facebook
-- This is the majority of requests
-- 2015, GraphQL started being promoted by the React team at Facebook
-- Lee Byron Published [GraphQL: A data query language](https://code.facebook.com/posts/1691455094417024/graphql-a-data-query-language/)
-                    </textarea>
+                <section>
+                    <h2>GraphQL today</h2>
+                    <aside class="notes">
+                      <ul>
+                        <li>Since then, GraphQL powers the Android and iOS Facebook apps</li>
+                        <li>300 billion+ requests per day at Facebook</li>
+                        <li>This is the majority of requests</li>
+                        <li>2015, GraphQL started being promoted by the React team at Facebook</li>
+                        <li>Lee Byron Published</li>
+                      </ul>
+                    </aside>
                 </section>
                 <section data-background-color="#ffffff">
                     <h2>Who uses it?</h2>
@@ -163,9 +165,11 @@
                         <img src="http://graphql.org/users/logos/zzish.png" style="width: 10%; border: 0; box-shadow: none">
                     </section>
                 </section>
-                
+
                 <section>
                     <h2>Does REST have a problem?</h2>
+                </section>
+                <section>
                     <section>
                         <h3>Overfetching</h3>
                         <img src="assets/trello.gif" style="float: left; max-width: 30%">
@@ -334,7 +338,7 @@
                               something model, something view",
                             "likes": 241,
                             "author": {
-                              "name": "@dan_abramov"
+                              "name": "Dan Abramov"
                             }
                           }
                         ]
@@ -368,14 +372,14 @@
                             "content": "Something old, something new, something model, something view",
                             "likes": 241,
                             "author": {
-                              "name": "@dan_abramov",
+                              "name": "Dan Abramov",
                               "followers": [
                                 {
-                                  "name": "@coffeeHeadJim",
+                                  "name": "James Nolan",
                                   "tweets": []
                                 },
                                 {
-                                  "name": "@BrendanEich",
+                                  "name": "Brendan Eich",
                                   "tweets": [
                                     {
                                       "content": "Learn from my history, _mes enfants_! When designing something, esp. in a hurry, resist requests for \"loose\" or \"easy to use\" enhancements"
@@ -383,7 +387,7 @@
                                   ]
                                 },
                                 {
-                                  "name": "@paul_irish",
+                                  "name": "Paul Irish",
                                   "tweets": [
                                     {
                                       "content": "Protip: `cd -` and `git checkout -` return you to where you were last"
@@ -398,6 +402,50 @@
                       </code></pre>
                     </section>
                 </section>
+
+                <section>
+                    <section>
+                      <h2>Mutations</h2>
+                    </section>
+                    <section>
+                      <pre><code data-trim data-noescape>
+                      tweets(limit: 1) {
+                        id
+                        content
+                        likes
+                      }
+                      </code></pre>
+                      <pre><code data-trim data-noescape>
+                      {
+                          "tweets": [
+                          {
+                            "id": "1",
+                            "content": "Something old, something new,
+                              something model, something view",
+                            "likes": 256
+                          }
+                        ]
+                      }
+                      </code></pre>
+                    </section>
+                    <section>
+                      <pre><code data-trim data-noescape>
+                      mutation {
+                        likeTweet(id: 1) {
+                          likes
+                        }
+                      }
+                      </code></pre>
+                      <pre><code data-trim data-noescape>
+                      {
+                        "likeTweet": {
+                          "likes": 256
+                        }
+                      }
+                      </code></pre>
+                    </section>
+
+                  </section>
                 <section data-markdown>
                     <textarea data-template>
 ## Resources
@@ -421,7 +469,8 @@
                     { src: 'plugin/markdown/marked.js' },
                     { src: 'plugin/markdown/markdown.js' },
                     { src: 'plugin/notes/notes.js', async: true },
-                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
                 ]
             });
         </script>
