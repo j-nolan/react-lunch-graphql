@@ -1,8 +1,8 @@
 module.exports = `
   type User {
     id: ID
-    name: String,
-    followers: [User],
+    name: String
+    followers: [User]
     tweets(limit: Int): [Tweet]
   }
   type Tweet {
