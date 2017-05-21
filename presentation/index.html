@@ -1,0 +1,429 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>reveal.js</title>
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                  <h2>GraphQL and Apollo client</h2>
+                  <img src="http://graphql.nodaljs.com/static/images/graphql_logo.png" style="height: 300px; border: 0">
+                  <img src="https://pbs.twimg.com/profile_images/842844018606186496/HwAymj6H.jpg" style="height: 300px; border: 0">
+                  <img src="https://pblackops.github.io/react/images/react.png" style="height: 300px; border: 0">
+                  <p>ReactJS Lunch @ CHILI lab, EPFL</p>
+
+                  <p>May 29th, 2017</p>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+## About myself
+- James Nolan
+- "Full stack" software engineer @ [coteries.com](https://coteries.com/)
+- JavaScript, React
+- [twitter.com/<u>CoffeeHeadJim</u>](https://twitter.com/CoffeeHeadJim)
+- [j.nolan@otherwise.ch](mailto:j.nolan@otherwise.ch)
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+## new GraphQL()
+
+- in 2012 Facebook released its mobile app 
+- the app was built in html5
+- bad response from user. Laggy feeling 
+- they decided to completely redesign the app in the native environment 
+- at the time, Facebook was a "simple" PHP website. Serverside rendered. Move fast, break things. Everybody could see new releases instantly. No need to have an API layer, no need for maintaining endpoints, They wanted to keep that speed
+- one of the main question that came up was "What would an ideal API look like?"
+- and they built graphql
+- conclusion: graphql was built for native apps by web developers 
+- this may be graphql popularity in web apps today
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+## GraphQL.now()
+
+- Since then, GraphQL powers the Android and iOS Facebook apps
+- 300 billion+ requests per day at Facebook
+- This is the majority of requests
+- 2015, GraphQL started being promoted by the React team at Facebook
+- Lee Byron Published [GraphQL: A data query language](https://code.facebook.com/posts/1691455094417024/graphql-a-data-query-language/)
+                    </textarea>
+                </section>
+                <section data-background-color="#ffffff">
+                    <h2>Who uses it?</h2>
+                    <section>
+                        <img src="http://graphql.org/users/logos/20minutes.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/adayroi.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/allocine.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/alphasights.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/ants.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/appier.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/arangodb.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/artsy.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/attendify.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/bazinga.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/blenderbottle.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/brewerybuddy.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/bright.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/buildkite.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/clubmed.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/commercetools.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/coursera.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/creditkarma.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/curio.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/directlyrics.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/drift.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/duedil.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/eastview.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/easycarros.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/ediket.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/facebook.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/github.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/graphcms.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/graphcool.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/hijup.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/housinganywhere.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/hudl.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/icon-systems.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/idobata.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/indonesiax.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/inerva.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/intuit.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/leanix.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/legendsoflearning.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/lelivrescolaire.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/loggi.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/m1finance.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/make-school.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/meteor.png" style="width: 10%; border: 0; box-shadow: none">
+                    </section>
+                    <section>
+                        <img src="http://graphql.org/users/logos/mixcloud.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/mojilala.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/newspring.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/ningensoft.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/nova-ideo.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/okgrow.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/ovos.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/persado.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/pinterest.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/product-hunt.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/project-september.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/prowl.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/quri.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/redbubble.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/reindex.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/restorando.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/salestock.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/scaphold.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/serverless.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/shopify.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/sky.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/skyarchnetworks.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/smarkets.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/startupsco.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/stem.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/swapcard.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/syzygy.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/taller.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/thehunt.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/trove.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/unigraph.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/ustglobal.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/vanilaio.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/waitlessq.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/waldo-photos.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/wayfair.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/whitescape.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/wirtualnapolska.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/wishlife.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/workflowgen.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/wowair.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/zlyde.png" style="width: 10%; border: 0; box-shadow: none">
+                        <img src="http://graphql.org/users/logos/zzish.png" style="width: 10%; border: 0; box-shadow: none">
+                    </section>
+                </section>
+                
+                <section>
+                    <h2>Does REST have a problem?</h2>
+                    <section>
+                        <h3>Overfetching</h3>
+                        <img src="assets/trello.gif" style="float: left; max-width: 30%">
+                        <div style="float: right; width: 60%">
+                            <pre><code data-trim data-noescape>
+                            ⟶ GET board/123/cards
+                            ⟵ 200 OK [{
+                              "content": "Move static assets to CDN",
+                              "collaborators": [{...}],
+                              "labels": [{...}, {...}],
+                              "board": {...},
+                              "checklists": [{...}, {...}],
+                              "createdAt": {...},
+                              "updatedAt": {...},
+                              "expiresAt": {...},
+                              "dueDate": {...},
+                              "author": {...},
+                              "attachments": [{...}, {...}],
+                              "activity": [{...}, {...}],
+                              "webhooks": [{...}, {...}],
+                            ]}
+                            </code></pre>
+                        </div>
+                    </section>
+                    <section>
+                        <h3>Extra roundtrips</h3>
+                        <div style="float: left; width: 60%">
+                            <pre><code data-trim data-noescape>
+                            ⟶ GET board/123/cards
+                            ⟵ 200 OK [{
+                              "content": "Move static assets to CDN",
+                              "collaboratorsIds": [1308]
+                            ]}
+
+                            ⟶ GET collaborator/1308
+                            ⟵ 200 OK [{
+                              "name": "Manu",
+                              "avatar": "https://..."
+                            ]}
+                            </code></pre>
+                        </div>
+                        <img src="assets/trello.gif" style="float: right; max-width: 30%">
+                    </section>
+                    <section>
+                        <h3>REST's solutions</h3>
+                        <ul>
+                          <li>Explicit fields</li>
+                          <li>Subtrees</li>
+                          <li>More endpoints</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <pre><code data-trim data-noescape>
+                        ⟶ GET board/123/cards?include=content,labels&amp;expand=collaborators
+                        ⟵ 200 OK [{
+                          "content": "Move static assets to CDN",
+                          "labelsIds": [99, 101],
+                          "collaborators": [{...}, {...}]
+                        ]}
+                        </code></pre>
+                        <pre><code data-trim data-noescape>
+                        ⟶ GET board/123/cards
+                        ⟵ 200 OK [{
+                          ...
+                          "collaborators": [{
+                            "name": "Manu",
+                            "avatar": "https://...",
+                            "type": "premium",
+                            "cards": [...],
+                          }],
+                          ...
+                        ]}
+                        </code></pre>
+                    </section>
+                    <section>
+                      <h3>Hard do get right</h3>
+                      <ul>
+                        <li>How to keep a reasonable number of endpoints?</li>
+                        <li>How to enumerate fields in subtrees?</li>
+                        <li>When is a subtree more relevant than a reference (ID)?</li>
+                        <li>Should the backend developers maintain endpoints for each frontend view?</li>
+                        <li><strong>Why would we let the server decide what data to return?</strong></li>
+                      </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <h2>GraphQL</h2>
+                    <ul>
+                        <li>Lets clients specify their own <strong>data needs</strong></li>
+                        <li>Lets the server expose its own <strong>capabilities</strong></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <section>
+                      <h2>Queries</h2>
+                    </section>
+                    <section>
+                      <pre><code data-trim data-noescape>
+                      query {
+                        tweets {
+                          content
+                          likes
+                        }
+                      }
+                      </code></pre>
+                      <pre><code data-trim data-noescape>
+                      {"tweets": [
+                        {
+                          "content": "Something old, something new,
+                            something model, something view",
+                          "likes": 241
+                        }, {
+                          "content": "Learn from my history, _mes enfants_!
+                            When designing something, esp. in a hurry,
+                            resist requests for \"loose\" or \"easy to use\"
+                            enhancements",
+                          "likes": 49
+                        }, {
+                          "content": "Protip: `cd -` and `git checkout -`
+                            return you to where you were last",
+                          "likes": 866
+                        }
+                      ]}
+                      </code></pre>
+                    </section>
+                    <section>
+                      <pre><code data-trim data-noescape>
+                      query {
+                        tweets(limit: 1) {
+                          content
+                          likes
+                        }
+                      }
+                      </code></pre>
+                      <pre><code data-trim data-noescape>
+                      {
+                        "tweets": [
+                          {
+                            "content": "Something old, something new,
+                              something model, something view",
+                            "likes": 241
+                          }
+                        ]
+                      }
+                      </code></pre>
+                    </section>
+                    <section>
+                      <pre><code data-trim data-noescape>
+                      query {
+                        tweets(limit: 1) {
+                          content
+                          likes
+                          author {
+                            name
+                          }
+                        }
+                      }
+                      </code></pre>
+                      <pre><code data-trim data-noescape>
+                      {
+                        "tweets": [
+                          {
+                            "content": "Something old, something new,
+                              something model, something view",
+                            "likes": 241,
+                            "author": {
+                              "name": "@dan_abramov"
+                            }
+                          }
+                        ]
+                      }
+                      </code></pre>
+                    </section>
+                    <section>
+                      <pre><code data-trim data-noescape>
+                      query {
+                        tweets(limit: 1) {
+                          content
+                          likes
+                          author {
+                            name
+                            followers {
+                              name
+                              tweets {
+                                content
+                              }
+                            }
+                          }
+                        }
+                      }
+                      </code></pre>
+                    </section>
+                    <section>
+                      <pre><code data-trim data-noescape>
+                      {
+                        "tweets": [
+                          {
+                            "content": "Something old, something new, something model, something view",
+                            "likes": 241,
+                            "author": {
+                              "name": "@dan_abramov",
+                              "followers": [
+                                {
+                                  "name": "@coffeeHeadJim",
+                                  "tweets": []
+                                },
+                                {
+                                  "name": "@BrendanEich",
+                                  "tweets": [
+                                    {
+                                      "content": "Learn from my history, _mes enfants_! When designing something, esp. in a hurry, resist requests for \"loose\" or \"easy to use\" enhancements"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "@paul_irish",
+                                  "tweets": [
+                                    {
+                                      "content": "Protip: `cd -` and `git checkout -` return you to where you were last"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                      </code></pre>
+                    </section>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+## Resources
+
+- [Strong typing from the server to the UI with GraphQL](https://www.youtube.com/watch?v=i_lJ8kMPQDM), Martijn Walraven
+- [Who's using GraphQL?](http://graphql.org/users/)
+                    </textarea>
+                </section>
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            // More info about config & dependencies:
+            // - https://github.com/hakimel/reveal.js#configuration
+            // - https://github.com/hakimel/reveal.js#dependencies
+            Reveal.initialize({
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js' },
+                    { src: 'plugin/markdown/markdown.js' },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+                ]
+            });
+        </script>
+    </body>
+</html>
