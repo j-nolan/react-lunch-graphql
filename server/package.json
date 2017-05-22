@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.3",
     "express": "^4.15.3",
     "express-graphql": "^0.6.5",
     "graphql": "^0.9.6",
