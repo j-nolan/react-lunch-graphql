@@ -59,6 +59,9 @@ const loadTweets = ({ author, limit }) => {
   return Promise.resolve(filteredTweets.slice(0, limit))
 }
 
+const loadTweet = id =>
+  tweets.find(t => t.id === id)
+
 const loadUser = (id) => {
   const user = users.find(u => u.id === id)
   return Promise.resolve(user)
@@ -68,7 +71,7 @@ const loadFollowers = id => loadUser(id)
   .then(user => Promise.all(user.followers.map(loadUser)))
 
 const likeTweet = (id) => {
-  const tweet = tweets.find(t => t.id === id)
+  const tweet = loadTweet(id)
   if (tweet) {
     tweet.likes += 1
   }
@@ -77,6 +80,7 @@ const likeTweet = (id) => {
 
 module.exports = {
   loadTweets,
+  loadTweet,
   loadUser,
   loadFollowers,
   likeTweet,

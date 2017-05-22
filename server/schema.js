@@ -26,6 +26,9 @@ module.exports = `
     # specify the max number of tweets the API can return
     tweets(limit: Int): [Tweet]
 
+    # Returns a single tweet by its ID
+    tweet(id: ID!): Tweet
+
   }
 
   # Mutations are similar to Queries, except that they will probably change something

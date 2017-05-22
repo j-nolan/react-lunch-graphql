@@ -10,6 +10,7 @@ module.exports = {
   },
   Query: {
     tweets: (_, { limit }) => store.loadTweets({ limit }),
+    tweet: (_, { id }) => store.loadTweet(Number(id)),
   },
   Mutation: {
     likeTweet: (_, { id }) => store.likeTweet(Number(id)),
