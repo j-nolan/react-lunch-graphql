@@ -1,0 +1,27 @@
+.tweet {
+  background: white;
+  width: 70%;
+  margin: auto;
+  margin-bottom: 85px;
+  padding: 55px 35px;
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
+}
+
+.content {
+  margin: 0;
+  padding: 0;
+  font-size: 3em;
+  color: #555;
+}
+
+.content::before {
+  content: '«';
+  margin-right: 20px;
+  color: lightgrey;
+}
+
+.content::after {
+  content: '»';
+  margin-left: 20px;
+  color: lightgrey;
+}

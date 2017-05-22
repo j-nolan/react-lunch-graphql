@@ -1,0 +1,19 @@
+.likes {
+  background: transparent;
+  border: 0;
+  width: 100%;
+  cursor: pointer;
+  display: block;
+  margin-top: 35px;
+  color: grey;
+  font-family: 'Muli', sans-serif;
+  font-weight: 200;
+  font-size: 2.5em;
+}
+
+.likes::before {
+  content: "\2661";
+  display: block;
+  font-size: 1.5em;
+  color: red;
+}
