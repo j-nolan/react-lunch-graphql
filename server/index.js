@@ -2,7 +2,7 @@ const express = require('express')
 const graphqlHTTP = require('express-graphql')
 const makeExecutableSchema = require('graphql-tools').makeExecutableSchema
 const cors = require('cors')
-const schema = require('./schema')
+const schema = require('./schema.gql')
 const resolvers = require('./resolvers')
 
 const app = express()

@@ -1,21 +1,41 @@
 module.exports = `
+  #
   # Welcome to the MiniTwitter GraphQL API. It was built by James Nolan as a
   # demonstration for the May 29th React Lunch about GrapHQL and Apollo client
+  #
 
   # Users can write tweets. Users have IDs that have the format of a twitter handle
   type User {
+
+    # The ID of the user. It is in the Twitter handle format, such as @johnDoe
     id: ID
+
+    # The name of the user. Usually first name + last name
     name: String
+
+    # The list of users that follow that user
     followers: [User]
+
+    # The list of tweets the user wrote
     tweets(limit: Int): [Tweet]
+
   }
 
   # A tweet typically consists in a small text and the number of people that liked it
   type Tweet {
+
+    # The ID of a tweet. Typically a unique integer
     id: ID
+
+     # the actual content of the tweet. Max 144 in length!
     content: String
+
+    # the number of times the tweet has been liked
     likes: Int
+
+    # the user that wrote the tweet
     author: User
+
   }
 
   # Queries allows the client to retrieve data from the API. GraphQL queries can be
