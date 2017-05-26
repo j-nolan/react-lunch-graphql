@@ -33,43 +33,62 @@
 
                   <p>May 29th, 2017</p>
                 </section>
-                <section data-markdown>
-                    <textarea data-template>
-## About myself
-- James Nolan
-- "Full stack" software engineer @ [coteries.com](https://coteries.com/)
-- JavaScript, React
-- [twitter.com/<u>CoffeeHeadJim</u>](https://twitter.com/CoffeeHeadJim)
-- [j.nolan@otherwise.ch](mailto:j.nolan@otherwise.ch)
-                    </textarea>
+                <section>
+                  <h2>About myself</h2>
+                  <ul>
+                    <li>James Nolan</li>
+                    <li>"Full stack" software engineer @ <a href="https://coteries.com/">coteries &bull; Lab</a></li>
+                    <li>JavaScript, React</li>
+                    <li>Twitter <a href="https://twitter.com/CoffeeHeadJim">@CoffeeHeadJim</a></li>
+                    <li><a href="mailto:j.nolan@otherwise.ch">j.nolan@otherwise.ch</a></li>
+                  </ul>
                 </section>
                 <section>
                     <h2>History</h2>
-                    <aside class="notes">
-                      <ul>
-                        <li>in 2012 Facebook released its mobile app</li>
-                        <li>the app was built in html5</li>
-                        <li>bad response from user. Laggy feeling</li>
-                        <li>they decided to completely redesign the app in the native environment</li>
-                        <li>at the time, Facebook was a "simple" PHP website. Serverside rendered. Move fast, break things. Everybody could see new releases instantly. No need to have an API layer, no need for maintaining endpoints, They wanted to keep that speed</li>
-                        <li>one of the main question that came up was "What would an ideal API look like?"</li>
-                        <li>and they built graphql</li>
-                        <li>conclusion: graphql was built for native apps by web developers</li>
-                        <li>this may be graphql popularity in web apps today</li>
-                      </ul>
-                    </aside>
-                </section>
-                <section>
-                    <h2>GraphQL today</h2>
-                    <aside class="notes">
+                      <section>
+                        <ul>
+                          <li>2012, Facebook redesigns app after HTML5 fiasco</li>
+                          <li><strong>"What would an ideal API look like?"</strong></li>
+                        </ul>
+                        <aside class="notes">
+                          <ul>
+                            <li>in 2012 Facebook released its mobile app</li>
+                            <li>the app was built in html5</li>
+                            <li>bad response from user. Laggy feeling</li>
+                            <li>they decided to completely redesign the app in the native environment</li>
+                            <li>at the time, Facebook was a "simple" PHP website. Serverside rendered. Move fast, break things. Everybody could see new releases instantly. No need to have an API layer, no need for maintaining endpoints, They wanted to keep that speed</li>
+                            <li>one of the main question that came up was "What would an ideal API look like?"</li>
+                            <li>and they built graphql</li>
+                            <li>conclusion: graphql was built for native apps by web developers</li>
+                            <li>this may be graphql popularity in web apps today</li>
+                          </ul>
+                        </aside>
+                    </section>
+                    <section>
                       <ul>
                         <li>Since then, GraphQL powers the Android and iOS Facebook apps</li>
                         <li>300 billion+ requests per day at Facebook</li>
-                        <li>This is the majority of requests</li>
-                        <li>2015, GraphQL started being promoted by the React team at Facebook</li>
-                        <li>Lee Byron Published</li>
+                        <li>2015, open sourced</li>
                       </ul>
-                    </aside>
+                      <aside class="notes">
+                        <ul>
+                          <li>in 2012 Facebook released its mobile app</li>
+                          <li>the app was built in html5</li>
+                          <li>bad response from user. Laggy feeling</li>
+                          <li>they decided to completely redesign the app in the native environment</li>
+                          <li>at the time, Facebook was a "simple" PHP website. Serverside rendered. Move fast, break things. Everybody could see new releases instantly. No need to have an API layer, no need for maintaining endpoints, They wanted to keep that speed</li>
+                          <li>one of the main question that came up was "What would an ideal API look like?"</li>
+                          <li>and they built graphql</li>
+                          <li>conclusion: graphql was built for native apps by web developers</li>
+                          <li>this may be graphql popularity in web apps today</li>
+                          <li>Since then, GraphQL powers the Android and iOS Facebook apps</li>
+                          <li>300 billion+ requests per day at Facebook</li>
+                          <li>This is the majority of requests</li>
+                          <li>2015, GraphQL started being promoted by the React team at Facebook</li>
+                          <li>Lee Byron Published <a href="https://code.facebook.com/posts/1691455094417024/graphql-a-data-query-language/">GraphQL, a data query language</a></li>
+                        </ul>
+                      </aside>
+                  </section>
                 </section>
                 <section data-background-color="#ffffff">
                     <h2>Who uses it?</h2>
@@ -165,7 +184,6 @@
                         <img src="http://graphql.org/users/logos/zzish.png" style="width: 10%; border: 0; box-shadow: none">
                     </section>
                 </section>
-
                 <section>
                     <h2>Does REST have a problem?</h2>
                 </section>
@@ -257,11 +275,35 @@
                 </section>
 
                 <section>
-                    <h2>GraphQL</h2>
+                  <h2>What is GraphQL?</h2>
+                  <section>
+                    <img src="assets/graphql-example.jpg">
+                  </section>
+                  <section>
                     <ul>
+                      <li>Defines a data shape</li>
+                      <li>Hierarchical</li>
+                      <li>Strongly typed</li>
+                      <li>Protocol, not storage</li>
+                      <li>Introspective</li>
+                    </ul>
+                    <aside class="notes">
+                      <ul>
+                        <li>Defines a data shape: The first thing you'll notice is that GraphQL queries mirror their response. This makes it easy to predict the shape of the data returned from a query, as well as to write a query if you know the data your app needs. More important, this makes GraphQL really easy to learn and use. GraphQL is unapologetically driven by the data requirements of products and of the designers and developers who build them.</li>
+                        <li>Hierarchical: Another important aspect of GraphQL is its hierarchical nature. GraphQL naturally follows relationships between objects, where a RESTful service may require multiple round-trips (resource-intensive on mobile networks) or a complex join statement in SQL. This data hierarchy pairs well with graph-structured data stores and ultimately with the hierarchical user interfaces it's used within.</li>
+                        <li>Strongly typed: Each level of a GraphQL query corresponds to a particular type, and each type describes a set of available fields. Similar to SQL, this allows GraphQL to provide descriptive error messages before executing a query.</li>
+                        <li>Protocol, not storage: Each GraphQL field on the server is backed by any arbitrary function. While we were building GraphQL to support News Feed, we already had a sophisticated feed ranking and storage model, along with existing databases and business logic. GraphQL had to leverage all this existing work to be useful, and so does not dictate or provide any backing storage. Instead, GraphQL takes advantage of your existing code.</li>
+                        <li>Introspective: A GraphQL server can be queried for the types it supports. This creates a powerful platform for tools and client software to build atop this information like code generation in statically typed languages, our application framework, Relay, or IDEs like GraphiQL (pictured below). GraphiQL helps developers learn and explore an API quickly without grepping the codebase or wrangling with cURL.</li>
+                      </ul>
+                    </aside>
+                  </section>
+
+                  <section>
+                      <ul>
                         <li>Lets clients specify their own <strong>data needs</strong></li>
                         <li>Lets the server expose its own <strong>capabilities</strong></li>
-                    </ul>
+                      </ul>
+                  </section>
                 </section>
 
                 <section>
@@ -446,13 +488,13 @@
                     </section>
 
                   </section>
-                <section data-markdown>
-                    <textarea data-template>
-## Resources
-
-- [Strong typing from the server to the UI with GraphQL](https://www.youtube.com/watch?v=i_lJ8kMPQDM), Martijn Walraven
-- [Who's using GraphQL?](http://graphql.org/users/)
-                    </textarea>
+                <section>
+                  <h2>Sources</h2>
+                  <ul>
+                    <li><a href="https://www.youtube.com/watch?v=MGHwJ-dH2Os">Strong typing from the server to the UI with GraphQL</a>, Martijn Walraven @ UIKonf 2017</li>
+                    <li><a href="http://graphql.org/users/">Who's using GraphQL?</a></li>
+                    <li><a href="https://code.facebook.com/posts/1691455094417024/graphql-a-data-query-language/">GraphQL, a data query language</a>, Lee Byron</li>
+                  </ul>
                 </section>
             </div>
         </div>
