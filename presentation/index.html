@@ -183,9 +183,24 @@
                         <img src="http://graphql.org/users/logos/zlyde.png" style="width: 10%; border: 0; box-shadow: none">
                         <img src="http://graphql.org/users/logos/zzish.png" style="width: 10%; border: 0; box-shadow: none">
                     </section>
+                    <aside class="notes">
+                      <ul>
+                        <li>20 Minutes</li>
+                        <li>Club Med</li>
+                        <li>Coursera</li>
+                        <li>Facebook</li>
+                        <li>Github</li>
+                        <li>Meteor</li>
+                        <li>Pinterest</li>
+                        <li>Product Hunt</li>
+                        <li>Shopify</li>
+                        <li>Sky network</li>
+                        <li>Sky network</li>
+                      </ul>
+                    </aside>
                 </section>
                 <section>
-                    <h2>Does REST have a problem?</h2>
+                    <h2>The problem with REST</h2>
                 </section>
                 <section>
                     <section>
@@ -265,10 +280,10 @@
                     <section>
                       <h3>Hard do get right</h3>
                       <ul>
-                        <li>How to keep a reasonable number of endpoints?</li>
                         <li>How to enumerate fields in subtrees?</li>
                         <li>When is a subtree more relevant than a reference (ID)?</li>
                         <li>Should the backend developers maintain endpoints for each frontend view?</li>
+                        <li>How to keep a reasonable number of endpoints?</li>
                         <li><strong>Why would we let the server decide what data to return?</strong></li>
                       </ul>
                     </section>
@@ -311,137 +326,34 @@
                       <h2>Queries</h2>
                     </section>
                     <section>
-                      <pre><code data-trim data-noescape>
-                      query {
-                        tweets {
-                          content
-                          likes
-                        }
-                      }
-                      </code></pre>
-                      <pre><code data-trim data-noescape>
-                      {"tweets": [
-                        {
-                          "content": "Something old, something new,
-                            something model, something view",
-                          "likes": 241
-                        }, {
-                          "content": "Learn from my history, _mes enfants_!
-                            When designing something, esp. in a hurry,
-                            resist requests for \"loose\" or \"easy to use\"
-                            enhancements",
-                          "likes": 49
-                        }, {
-                          "content": "Protip: `cd -` and `git checkout -`
-                            return you to where you were last",
-                          "likes": 866
-                        }
-                      ]}
-                      </code></pre>
+                      <a  title="simple query" target="_blank" href="http://localhost:4000/graphql?query=query%20%7B%0A%20%20tweets%20%7B%0A%20%20%20%20content%0A%20%20%20%20likes%0A%20%20%7D%0A%7D%0A">
+                        <img src="assets/query-flat.png">
+                      </a>
                     </section>
                     <section>
-                      <pre><code data-trim data-noescape>
-                      query {
-                        tweets(limit: 1) {
-                          content
-                          likes
-                        }
-                      }
-                      </code></pre>
-                      <pre><code data-trim data-noescape>
-                      {
-                        "tweets": [
-                          {
-                            "content": "Something old, something new,
-                              something model, something view",
-                            "likes": 241
-                          }
-                        ]
-                      }
-                      </code></pre>
+                      <a title="Field parameters" target="_blank" href="http://localhost:4000/graphql?query=query%20%7B%0A%20%20tweets(limit%3A%201)%20%7B%0A%20%20%20%20content%0A%20%20%20%20likes%0A%20%20%7D%0A%7D%0A">
+                        <img src="assets/query-parameter.png">
+                      </a>
                     </section>
                     <section>
-                      <pre><code data-trim data-noescape>
-                      query {
-                        tweets(limit: 1) {
-                          content
-                          likes
-                          author {
-                            name
-                          }
-                        }
-                      }
-                      </code></pre>
-                      <pre><code data-trim data-noescape>
-                      {
-                        "tweets": [
-                          {
-                            "content": "Something old, something new,
-                              something model, something view",
-                            "likes": 241,
-                            "author": {
-                              "name": "Dan Abramov"
-                            }
-                          }
-                        ]
-                      }
-                      </code></pre>
+                      <a title="Deep query" target="_blank" href="http://localhost:4000/graphql?query=query%20%7B%0A%20%20tweets(limit%3A%201)%20%7B%0A%20%20%20%20content%0A%20%20%20%20likes%0A%20%20%20%20author%20%7B%0A%20%20%20%20%20%20name%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A">
+                        <img src="assets/query-deep.png">
+                      </a>
                     </section>
                     <section>
-                      <pre><code data-trim data-noescape>
-                      query {
-                        tweets(limit: 1) {
-                          content
-                          likes
-                          author {
-                            name
-                            followers {
-                              name
-                              tweets {
-                                content
-                              }
-                            }
-                          }
-                        }
-                      }
-                      </code></pre>
+                      <a title="Very deep query" target="_blank" href="http://localhost:4000/graphql?query=query%20%7B%0A%20%20tweets(limit%3A%201)%20%7B%0A%20%20%20%20content%0A%20%20%20%20likes%0A%20%20%20%20author%20%7B%0A%20%20%20%20%20%20name%0A%20%20%20%20%20%20followers%20%7B%0A%20%20%20%20%20%20%20%20name%0A%20%20%20%20%20%20%20%20tweets%20%7B%0A%20%20%20%20%20%20%20%20%20%20content%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A">
+                        <img src="assets/query-very-deep.png">
+                      </a>
                     </section>
                     <section>
-                      <pre><code data-trim data-noescape>
-                      {
-                        "tweets": [
-                          {
-                            "content": "Something old, something new, something model, something view",
-                            "likes": 241,
-                            "author": {
-                              "name": "Dan Abramov",
-                              "followers": [
-                                {
-                                  "name": "James Nolan",
-                                  "tweets": []
-                                },
-                                {
-                                  "name": "Brendan Eich",
-                                  "tweets": [
-                                    {
-                                      "content": "Learn from my history, _mes enfants_! When designing something, esp. in a hurry, resist requests for \"loose\" or \"easy to use\" enhancements"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "name": "Paul Irish",
-                                  "tweets": [
-                                    {
-                                      "content": "Protip: `cd -` and `git checkout -` return you to where you were last"
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          }
-                        ]
-                      }
-                      </code></pre>
+                      <a title="Query without variable" target="_blank" href="http://localhost:4000/graphql?query=query%20%7B%0A%20%20tweet(id%3A%201)%20%7B%0A%20%20%20%20content%0A%20%20%20%20likes%0A%20%20%7D%0A%7D%0A">
+                        <img src="assets/query-no-variables.png">
+                      </a>
+                    </section>
+                    <section>
+                      <a title="Query variable" target="_blank" href="http://localhost:4000/graphql?query=query%20(%24id%3A%20ID!)%20%7B%0A%20%20tweet(id%3A%20%24id)%20%7B%0A%20%20%20%20content%0A%20%20%20%20likes%0A%20%20%7D%0A%7D%0A&variables=%7B%22id%22%3A%201%7D">
+                        <img src="assets/query-variables.png">
+                      </a>
                     </section>
                 </section>
 
@@ -450,44 +362,296 @@
                       <h2>Mutations</h2>
                     </section>
                     <section>
-                      <pre><code data-trim data-noescape>
-                      tweets(limit: 1) {
-                        id
-                        content
-                        likes
-                      }
-                      </code></pre>
-                      <pre><code data-trim data-noescape>
-                      {
-                          "tweets": [
-                          {
-                            "id": "1",
-                            "content": "Something old, something new,
-                              something model, something view",
-                            "likes": 256
-                          }
-                        ]
-                      }
-                      </code></pre>
+                      <a title="Query without variable" target="_blank" href="http://localhost:4000/graphql?query=query%20%7B%0A%20%20tweet(id%3A%201)%20%7B%0A%20%20%20%20content%0A%20%20%20%20likes%0A%20%20%7D%0A%7D%0A">
+                        <img src="assets/query-no-variables.png">
+                      </a>
                     </section>
                     <section>
-                      <pre><code data-trim data-noescape>
-                      mutation {
-                        likeTweet(id: 1) {
-                          likes
-                        }
-                      }
-                      </code></pre>
-                      <pre><code data-trim data-noescape>
-                      {
-                        "likeTweet": {
-                          "likes": 256
-                        }
-                      }
-                      </code></pre>
+                      <a title="Like tweet" target="_blank" href="http://localhost:4000/graphql?query=mutation%20%7B%0A%20%20likeTweet(id%3A%201)%20%7B%0A%20%20%20%20content%0A%20%20%20%20likes%0A%20%20%7D%0A%7D">
+                        <img src="assets/mutation-liketweet.png">
+                      </a>
+                      <aside class="notes">
+                        <ul>
+                          <li><a href="https://medium.com/@HurricaneJames/graphql-mutations-fb3ad5ae73c4">"The only real difference between a mutation and a query is the word mutation"</a>, James Burnett</li>
+                          <li><a href="https://medium.com/@HurricaneJames/graphql-mutations-fb3ad5ae73c4">"There is nothing stopping a query from including a side effect just like a mutation."</a>, James Burnett</li>
+                          <li>Clients, servers might use it for caching purpose</li>
+                        </ul>
+                      </aside>
                     </section>
-
                   </section>
+                <section>
+                  <section>
+                    <h2>Subscriptions</h2>
+                  </section>
+                  <section>
+                    <img src="assets/subscriptions.gif" style="width: 100%">
+                  </section>
+                  <section>
+                    <img src="assets/subscription.png">
+                    <aside class="notes">
+                      <ul>
+                        <li>Uses websockets</li>
+                        <li>Pushes new state</li>
+                        <li>Especially useful for chats, games,...</li>
+                      </ul>
+                    </aside>
+                  </section>
+                </section>
+                <section>
+                  <section>
+                    <h2>Schema and types</h2>
+                  </section>
+                  <section>
+                    <pre><code>
+  #
+  # Welcome to the MiniTwitter GraphQL API. It was built by James Nolan as a
+  # demonstration for the May 29th React Lunch about GrapHQL and Apollo client
+  #
+
+  # Users can write tweets. Users have IDs that have the format of a twitter handle
+  type User {
+
+    # The ID of the user. It is in the Twitter handle format, such as @johnDoe
+    id: ID
+
+    # The name of the user. Usually first name + last name
+    name: String
+
+    # The list of users that follow that user
+    followers: [User]
+
+    # The list of tweets the user wrote
+    tweets(limit: Int): [Tweet]
+
+  }
+
+  # A tweet typically consists in a small text and the number of people that liked it
+  type Tweet {
+
+    # The ID of a tweet. Typically a unique integer
+    id: ID
+
+     # the actual content of the tweet. Max 144 in length!
+    content: String
+
+    # the number of times the tweet has been liked
+    likes: Int
+
+    # the user that wrote the tweet
+    author: User
+
+  }
+
+  # Queries allows the client to retrieve data from the API. GraphQL queries can be
+  # compared to GET requests in REST APIs
+  type Query {
+
+    # Returns a list of all the tweets. You can optionally pass a limit parameter to
+    # specify the max number of tweets the API can return
+    tweets(limit: Int): [Tweet]
+
+    # Returns a single tweet by its ID
+    tweet(id: ID!): Tweet
+
+  }
+
+  # Mutations are similar to Queries, except that they will probably change something
+  # in the data. GraphQL Mutations can be compared to POST requests in REST APIs
+  type Mutation {
+
+    # Updates the "like" count of a given tweet. You should pass the ID of the tweet
+    # to update
+    likeTweet(id: ID!): Tweet
+
+  }
+`
+                    </code></pre>
+                    <p>(view in editor)</p>
+                  </section>
+                  <section>
+                    <h3>Scalar types</h3>
+                    <ul>
+                      <li><code>Int</code>: a 32-bit signed integer</li>
+                      <li><code>Float</code>: A signed double-precision floating-point value</li>
+                      <li><code>String</code>: A UTF‐8 character sequence</li>
+                      <li><code>Boolean</code>: true or false</li>
+                      <li><code>ID</code>: A unique identifier (alias of String)</li>
+                      <li>Custom scalars</li>
+                    </ul>
+                    <aside class="notes">
+                      <ul>
+                        <li>Custom scalar example: Date</li>
+                        <li>Custom scalar: you have to specify how to de/serialize it</li>
+                      </ul>
+                    </aside>
+                  </section>
+                  <section>
+                    <h3>Enums</h3>
+                    <pre><code>
+enum CoffeeSize {
+  Short
+  Tall
+  Grande
+  Venti
+}
+                    </code></pre>
+                    <pre><code>
+mutation ($type: String, $size: CoffeeSize) {
+  orderCoffee (type: $type, size: $size) {
+    timeToWait
+  }
+}
+
+# variables
+{ type: "Americano", CoffeeSize: "Short" }
+                    </code></pre>
+                  </section>
+                  <section>
+                    <h3>Lists and null values</h3>
+                    <pre><code>
+type User {
+  id: ID!
+  name: String!
+  followers: [User!]
+}
+                    </code></pre>
+                  </section>
+                  <section>
+                    <h3>Other constructs</h3>
+                    <ul>
+                      <li>Interfaces</li>
+                      <li>Unions</li>
+                      <li>Input types</li>
+                      <li>Fragments</li>
+                      <li>Directives</li>
+                    </ul>
+                  </section>
+                </section>
+                <section>
+                  <section>
+                    <h2>Apollo</h2>
+                    <p>Connecting a simple UI to a GraphQL server</p>
+                  </section>
+                  <section>
+                    <h3>Step 0: run backend &amp; frontend</h3>
+                    <code><pre>
+git clone git@github.com:j-nolan/react-lunch-graphql.git
+cd react-lunch-graphql
+cd server && npm install && npm start
+cd app && npm install && npm start
+                    </code></pre>
+                  </section>
+                  <section>
+                    <h3>Step 1: A pure UI</h3>
+                    <code>git checkout pure-ui</code>
+                    <a target="_blank" href="http://localhost:3000"><img  style="max-height: 300px" src="assets/mini-twitter.png"></a>
+                  </section>
+                  <section>
+                    <h3>Step 2: Query Tweet</h3>
+                    <code>git checkout query-tweet</code>
+                    <aside class="notes">
+                      <ul>
+                        <li>Demonstrates a simple query</li>
+                        <li>Note how we can duplicate the tweet and graphql only performs a single query</li>
+                      </ul>
+                    </aside>
+                  </section>
+                  <section>
+                    <h3>Step 3: Mutate tweet</h3>
+                    <code>git checkout mutate-tweet</code>
+                    <aside class="notes">
+                      <ul>
+                        <li>Demonstrates a mutation</li>
+                        <li>Look how it refreshes multiple components at once!</li>
+                      </ul>
+                    </aside>
+                  </section>
+                  <section>
+                    <h3>Step 4: Optimistic Like Tweet</h3>
+                    <code>git checkout like-tweet-optimistic</code>
+                    <aside class="notes">
+                      <ul>
+                        <li>Thottle to emphasis effect</li>
+                        <li>Look how it refreshes multiple components at once!</li>
+                      </ul>
+                    </aside>
+                  </section>
+                  <section>
+                    <h3>(Step 5: Pagination)</h3>
+                    <p>(If I have time to prepare a demo)</p>
+                  </section>
+                  <section>
+                    <h3>(Step 6: Subscriptions)</h3>
+                    <p>(If I have time to prepare a demo)</p>
+                  </section>
+                </section>
+                <section>
+                  <h2>Mini case studies</h2>
+
+                  <section>
+                    <h3>Delayed queries</h3>
+                    <p>(WIP)</p>
+                  </section>
+
+                  <section>
+                    <h3>Manual store update</h3>
+                    <p>(WIP)</p>
+                  </section>
+
+                  <section>
+                    <h3>Offline first</h3>
+                    <p>(WIP)</p>
+                  </section>
+                </section>
+                <section>
+                  <h2>Tools</h2>
+                  <section>
+                    <h3>Graphiql</h3>
+                    <ul>
+                      <li>An browser GraphQL API explorer</li>
+                      <li>Queries, mutation, subscriptions, variables, validation...</li>
+                      <li>Dynamic documentation</li>
+                      <li>Widely adopted</li>
+                    </ul>
+                  </section>
+                  <section>
+                    <h3>Lokka</h3>
+                    <ul>
+                      <li>Basic JS GraphQL client for browser / Node.js / React Native</li>
+                      <li>Alternative to Apollo</li>
+                      <li>Doesn't support variables</li>
+                    </ul>
+                  </section>
+                  <section>
+                    <h3>Apollo dev tools</h3>
+                    <ul>
+                      <li>Bulit-in graphiql</li>
+                      <li>Easily inspect stores</li>
+                    </ul>
+                  </section>>
+                  <section>
+                    <h3>Launchpad</h3>
+                    <ul>
+                      <li>In-browser GraphQL server playground</li>
+                      <li>Instantly create public schemas</li>
+                    </ul>
+                  </section>
+                  <section>
+                    <h3>graph.cool</h3>
+                    <ul>
+                      <li>GraphQL Backend as a service</li>
+                      <li>Organize the GraphQL Europe conference</li>
+                    </ul>
+                  </section>
+                </section>
+                <section>
+                  <h2>Thanks</h2>
+                  <ul>
+                    <li><a href="https://twitter.com/martijnwalraven">Martijn Walraven</a></li>
+                    <li><a href="https://www.meetup.com/EFPL-Reactjs-Lunch/members/190756400/">Stian Håklev</a></li>
+                    <li><a href="https://twitter.com/nicedexter">Manuel Spuhler</a></li>
+                  </ul>
+                </section>
                 <section>
                   <h2>Sources</h2>
                   <ul>
