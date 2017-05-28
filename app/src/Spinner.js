@@ -5,7 +5,7 @@ import './Spinner.css'
 const Spinner = () => {
   return (
     <div className="spinnerContainer">
-      <img src={SpinnerSVG} />
+      <img src={SpinnerSVG} alt="Loading..." />
     </div>
   )
 }

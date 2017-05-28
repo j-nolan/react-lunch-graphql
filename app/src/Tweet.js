@@ -36,6 +36,6 @@ export default graphql(query, {
     variables: {
       id
     },
-    pollInterval: 1000
+    pollInterval: 4000
   })
 })(Tweet)

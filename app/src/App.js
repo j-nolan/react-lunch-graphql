@@ -8,20 +8,8 @@ const App = () => (
       <h1>MiniTwitter</h1>
     </div>
     <Tweet id="1" />
-    <Tweet id="1" />
-    <Tweet id="1" />
-    <Tweet id="1" />
-    <Tweet id="1" />
-    <Tweet id="1" />
-    <Tweet id="1" />
-    <Tweet id="1" />
-    <Tweet id="1" />
-    <Tweet id="1" />
-    <Tweet id="1" />
-    <Tweet id="1" />
-    <Tweet id="1" />
-    <Tweet id="1" />
-    <Tweet id="1" />
+    <Tweet id="2" />
+    <Tweet id="3" />
   </div>
 )
 
