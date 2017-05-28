@@ -16,6 +16,7 @@ const Tweet = ({ data }) => {
   return (
     <div className="tweet">
       <p className="content">{data.tweet.content}</p>
+      <p className="author">{data.tweet.author.name} ({data.tweet.author.id})</p>
       <Likes id={data.tweet.id} />
     </div>
   )
@@ -26,7 +27,10 @@ const query = gql`
     tweet(id: $id) {
       id
       content
-      likes
+      author {
+        id
+        name
+      }
     }
   }
 `

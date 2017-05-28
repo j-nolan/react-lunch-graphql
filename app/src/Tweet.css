@@ -25,3 +25,9 @@
   margin-left: 20px;
   color: lightgrey;
 }
+
+.author {
+  font-style: italic;
+  font-size: 2em;
+  color: lightgrey;
+}
