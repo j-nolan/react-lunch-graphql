@@ -46,13 +46,10 @@ const likeTweetOptimisticResponse = tweet => ({
 })
 
 export default compose(
-  graphql(query, {
-    options: ({ id }) => ({ variables: { id } }),
-  }),
+  graphql(query),
   graphql(mutation, {
     props: ({ ownProps, mutate }) => ({
       likeTweet: () => mutate({
-        variables: { id: ownProps.data.tweet.id },
         optimisticResponse: likeTweetOptimisticResponse(ownProps.data.tweet),
       })
     })

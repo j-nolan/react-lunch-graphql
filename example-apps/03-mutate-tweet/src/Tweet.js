@@ -35,11 +35,4 @@ const query = gql`
   }
 `
 
-export default graphql(query, {
-  options: ({ id }) => ({
-    variables: {
-      id
-    },
-    pollInterval: 4000
-  })
-})(Tweet)
+export default graphql(query)(Tweet)
