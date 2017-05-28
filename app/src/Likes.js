@@ -18,21 +18,21 @@ const Likes = ({ data, mutate }) => {
 }
 
 const query = gql`
-query($id: ID!) {
-  tweet(id: $id) {
-    id
-    likes
+  query($id: ID!) {
+    tweet(id: $id) {
+      id
+      likes
+    }
   }
-}
 `
 
 const mutation = gql`
-mutation($id: ID!) {
-  likeTweet(id: $id) {
-    id
-    likes
+  mutation($id: ID!) {
+    likeTweet(id: $id) {
+      id
+      likes
+    }
   }
-}
 `
 
 const mapPropsToOptions = ({ id }) => ({

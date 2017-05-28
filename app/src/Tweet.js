@@ -21,13 +21,13 @@ const Tweet = ({ data }) => {
 }
 
 const query = gql`
-query ($id: ID!) {
-  tweet(id: $id) {
-    id
-    content
-    likes
+  query ($id: ID!) {
+    tweet(id: $id) {
+      id
+      content
+      likes
+    }
   }
-}
 `
 
 export default graphql(query, {
