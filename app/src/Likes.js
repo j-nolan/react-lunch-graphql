@@ -3,7 +3,7 @@ import { gql, graphql, compose } from 'react-apollo'
 import Spinner from './Spinner'
 import './Likes.css'
 
-const Likes = ({ data, mutate }) => {
+const Likes = ({ data, likeTweet }) => {
   if (data.loading) {
     return <Spinner />
   }
@@ -12,7 +12,7 @@ const Likes = ({ data, mutate }) => {
   }
 
   return (
-    <button className="likes" type="button" onClick={mutate}>
+    <button className="likes" type="button" onClick={likeTweet}>
       {data.tweet.likes}
     </button>
   )
@@ -36,17 +36,25 @@ const mutation = gql`
   }
 `
 
-const mapPropsToOptions = ({ id }) => ({
-  variables: {
-    id
-  }
+const likeTweetOptimisticResponse = tweet => ({
+  __typename: 'Mutation',
+  likeTweet: {
+    id: tweet.id,
+    __typename: 'Tweet',
+    likes: tweet.likes + 1,
+  },
 })
 
 export default compose(
   graphql(query, {
-    options: mapPropsToOptions,
+    options: ({ id }) => ({ variables: { id } }),
   }),
   graphql(mutation, {
-    options: mapPropsToOptions,
+    props: ({ ownProps, mutate }) => ({
+      likeTweet: () => mutate({
+        variables: { id: ownProps.data.tweet.id },
+        optimisticResponse: likeTweetOptimisticResponse(ownProps.data.tweet),
+      })
+    })
   })
 )(Likes)
