@@ -302,6 +302,7 @@
                       <li>Protocol, not storage</li>
                       <li>Introspective</li>
                     </ul>
+                    <p><a href="https://code.facebook.com/posts/1691455094417024/graphql-a-data-query-language/">Lee Byron, 2015</a></p>
                     <aside class="notes">
                       <ul>
                         <li>Defines a data shape: The first thing you'll notice is that GraphQL queries mirror their response. This makes it easy to predict the shape of the data returned from a query, as well as to write a query if you know the data your app needs. More important, this makes GraphQL really easy to learn and use. GraphQL is unapologetically driven by the data requirements of products and of the designers and developers who build them.</li>
@@ -318,6 +319,7 @@
                         <li>Lets clients specify their own <strong>data needs</strong></li>
                         <li>Lets the server expose its own <strong>capabilities</strong></li>
                       </ul>
+                    <p><a href="https://www.youtube.com/watch?v=MGHwJ-dH2Os">Martijn Walraven, 2017</a></p>
                   </section>
                 </section>
 
@@ -533,22 +535,21 @@ type User {
                     <p>Connecting a simple UI to a GraphQL server</p>
                   </section>
                   <section>
-                    <h3>Step 0: run backend &amp; frontend</h3>
+                    <h3>Step 0: run backend</h3>
                     <code><pre>
 git clone git@github.com:j-nolan/react-lunch-graphql.git
 cd react-lunch-graphql
 cd server && npm install && npm start
-cd app && npm install && npm start
                     </code></pre>
                   </section>
                   <section>
                     <h3>Step 1: A pure UI</h3>
-                    <code>git checkout pure-ui</code>
+                    <code>cd example-apps/01-pure-ui && npm install && npm start</code>
                     <a target="_blank" href="http://localhost:3000"><img  style="max-height: 300px" src="assets/mini-twitter.png"></a>
                   </section>
                   <section>
                     <h3>Step 2: Query Tweet</h3>
-                    <code>git checkout query-tweet</code>
+                    <code>cd example-apps/02-query-tweet && npm install && npm start</code>
                     <aside class="notes">
                       <ul>
                         <li>Demonstrates a simple query</li>
@@ -558,7 +559,7 @@ cd app && npm install && npm start
                   </section>
                   <section>
                     <h3>Step 3: Mutate tweet</h3>
-                    <code>git checkout mutate-tweet</code>
+                    <code>cd example-apps/03-mutate-tweet && npm install && npm start</code>
                     <aside class="notes">
                       <ul>
                         <li>Demonstrates a mutation</li>
@@ -568,7 +569,7 @@ cd app && npm install && npm start
                   </section>
                   <section>
                     <h3>Step 4: Optimistic Like Tweet</h3>
-                    <code>git checkout like-tweet-optimistic</code>
+                    <code>cd example-apps/04-mutate-tweet-optimistic && npm install && npm start</code>
                     <aside class="notes">
                       <ul>
                         <li>Thottle to emphasis effect</li>
@@ -577,30 +578,127 @@ cd app && npm install && npm start
                     </aside>
                   </section>
                   <section>
-                    <h3>(Step 5: Pagination)</h3>
-                    <p>(If I have time to prepare a demo)</p>
+                    <h3>Step 5: Polling</h3>
+                    <code>cd example-apps/05-polling && npm install && npm start</code>
                   </section>
                   <section>
                     <h3>(Step 6: Subscriptions)</h3>
-                    <p>(If I have time to prepare a demo)</p>
+                  </section>
+                  <section>
+                    <h3>(Step 7: Pagination)</h3>
                   </section>
                 </section>
                 <section>
                   <h2>Mini case studies</h2>
 
                   <section>
-                    <h3>Delayed queries</h3>
-                    <p>(WIP)</p>
+                    <h3>Manual store update</h3>
+                    <ul>
+                      <li>Apollo updates its store automatically</li>
+                      <li>Uses normalization: maps {typename, id} -> object</li>
+                      <li>Doesn't handle adding <i>new</i> objects to lists</li>
+                    </ul>
                   </section>
 
                   <section>
-                    <h3>Manual store update</h3>
-                    <p>(WIP)</p>
+                    <h3>Solution 1: <code>refetchQueries</code></h3>
+                    <pre><code>
+
+export default graphql(createTweetMutation, {
+  props: ({ mutate }) => ({
+    createTweet: (content, authorId) => mutate({
+      variables: { content, authorId },
+      refetchQueries: [{
+        query: listTweetsQuery
+      }],
+    })
+  })
+})
+                    </pre></code>
+                    <aside class="notes">
+                      <ul>
+                        <li>Acceptable if roundtrips are not an issue</li>
+                        <li>Requires to *know* about queries to refetch</li>
+                      </ul>
+                    </aside>
+                  </section>
+
+                  <section>
+                    <h3>Solution 2: <code>update</code></h3>
+                    <pre><code>
+
+export default graphql(createTweetMutation, {
+  props: ({ mutate }) => ({
+    createTweet: (content, authorId) => mutate({
+      variables: { content, authorId },
+      update: (store, { data: { createTweet } }) => {
+        const data = store.readQuery({ query: listTweets });
+        data.tweets.push(createTweet);
+        store.writeQuery({ query: listTweets, data });
+      },
+    })
+  })
+})
+                    </pre></code>
+                    <aside class="notes">
+                      <ul>
+                        <li>Avoids round trips</li>
+                      </ul>
+                    </aside>
+                  </section>
+
+                  <section>
+                    <h3>Delayed queries</h3>
+                    <code><pre>
+&lt;App&gt;
+  graphql(closestTweets)(&lt;Map /&gt;)
+&lt;/App&gt;
+                    </pre></code>
+                    <ul>
+                      <li>Query might depend on data that we can only retrieve asynchronously</li>
+                      <li>In this case, <code>Geolocation.getCurrentPosition()</code></li>
+                    </ul>
+                  </section>
+
+                  <section>
+                    <h3>Solution 1</h3>
+                    <code><pre>
+&lt;App&gt;
+  withApollo(&lt;Map /&gt;)
+&lt;/App&gt;
+
+/* Map.js */
+export default class Map extends Component {
+  /* Get location, then manually trigger query, then render query result */
+}
+                    </pre></code>
+                    <ul>
+                      <li>Solution 1: take over and make the query manually</li>
+                      <li>Requires manually managing <code>loading</code> and <code>error</code> states</li>
+                      <li>Mixes stateful logic inside Map UI component</li>
+                    </ul>
+                  </section>
+
+                  <section>
+                    <h3>Solution 2</h3>
+                    <code><pre>
+&lt;App&gt;
+  withLocation(graphql(closestTweets)(&lt;Map /&gt;))
+&lt;/App&gt;
+                    </pre></code>
+                    <ul>
+                      <li><code>withLocation</code> Higher Order Component (HOC)</li>
+                      <li>Delays rendering <Map /> until location is resolved</li>
+                      <li>Reusable</li>
+                    </ul>
                   </section>
 
                   <section>
                     <h3>Offline first</h3>
-                    <p>(WIP)</p>
+                    <ul>
+                      <li>Offline mutations? Don't use Apollo (yet)</li>
+                      <li>Offline queries? Use redux-persist</li>
+                    </ul>
                   </section>
                 </section>
                 <section>
@@ -628,6 +726,9 @@ cd app && npm install && npm start
                       <li>Bulit-in graphiql</li>
                       <li>Easily inspect stores</li>
                     </ul>
+                  </section>
+                  <section>
+                      <h3><a href="https://marketplace.visualstudio.com/items?itemName=kumar-harsh.graphql-for-vscode">graphql-for-vscode</a></h3>
                   </section>
                   <section>
                     <h3>Launchpad</h3>
