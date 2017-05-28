@@ -1,11 +1,12 @@
 import React from 'react'
 import { gql, graphql } from 'react-apollo'
+import Spinner from './Spinner'
 import Likes from './Likes'
 import './Tweet.css'
 
 const Tweet = ({ data }) => {
   if (data.loading) {
-    return <p>Loading...</p>
+    return <Spinner />
   }
 
   if (data.error) {
